@@ -3,6 +3,11 @@ import axios from "axios";
 
 import '../App.css';
 
+// const api_url = "https://newsapi.org/v2/top-headlines?country=us&q=coronavirus&apiKey=";
+const api_url = process.env.API_URL;
+// const api_key = "407c0529551e4f43a30236fab2be4290";
+const api_key = process.env.API_KEY;
+
 class NewsList extends React.Component {
     state = {
         news: [],
@@ -11,8 +16,9 @@ class NewsList extends React.Component {
     };
     
     getNews() {
+
         axios
-            .get(`https://newsapi.org/v2/top-headlines?country=us&q=coronavirus&apiKey=407c0529551e4f43a30236fab2be4290`)
+            .get(`${api_url}${api_key}`)
             .then(response =>
                 response.data.articles.map(news => ({
                     id: `${news.source.id}`,
